@@ -10,7 +10,7 @@ public class BreadthFirstSearch implements Search{
 
     //to be able to detect repeated nodes
     private Map<String, Integer> map = new HashMap<>();
-
+    private boolean achieveGoal = false;
 
 
     @Override
@@ -43,19 +43,17 @@ public class BreadthFirstSearch implements Search{
 
         int counter = 1;
 
-        while (!nodeQueue.isEmpty()) {
+        while (!nodeQueue.isEmpty() && !achieveGoal) {
             System.out.println("counter -->"+counter);
             System.out.println();
 
-            Node tempHead = nodeQueue.remove(); // get head node
+            Node tempHead = nodeQueue.poll(); // get head node
 
-            PuzzleState testing1 = (PuzzleState) tempHead.getCurrentState();
-            System.out.println("#########################");
-            testing1.displayCurrentStateString();
-            System.out.println("#########################");
+            if (tempHead.getCurrentState().achievedGoal()) {
+                achieveGoal = true;
+                Board.printSolutionPath(tempHead);
 
-
-            if (!tempHead.getCurrentState().achievedGoal()) {
+            } else {
                 //not goal, therefore continue searching
 
                 List<State> childSuccessors = tempHead.getCurrentState().createSuccessors();
@@ -71,10 +69,6 @@ public class BreadthFirstSearch implements Search{
                 }
                 counter++;
 
-            } else {
-
-                Board.printSolutionPath(tempHead);
-                System.exit(0);
             }
         }
 

@@ -33,8 +33,9 @@ public class Driver {
 //        }
 
 
-        BreadthFirstSearch bfs = new BreadthFirstSearch();
-        bfs.initiateSearch(board1);
+        Search search = SearchFactory.getSearch(Search.TYPE.BFS);
+
+        search.initiateSearch(board1);
 
     }
 }

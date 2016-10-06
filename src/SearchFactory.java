@@ -3,7 +3,7 @@
  */
 public class SearchFactory {
 
-    public Search getSearch(Search.TYPE type)
+    public static Search getSearch(Search.TYPE type)
     {
         switch (type)
         {

@@ -81,8 +81,12 @@ public class Board {
             PuzzleState s = (PuzzleState) node.getCurrentState();
             Board.printBoard(s.getCurrentState());
             System.out.println();
-            System.out.println();
         }
+
+        PuzzleState s = (PuzzleState) node.getCurrentState();
+
+        s.displayGoalState();
+
 
         System.exit(0);
     }
