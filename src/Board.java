@@ -69,25 +69,43 @@ public class Board {
     /**
      * Print path to reach solution state
      *
-     * @param tempHead
+     * @param temp
      */
-    public static void printSolution(Node tempHead) {
+    public static void printSolution(Node temp) {
 
-        Stack<Node> solutionPath = getHistoryNodes(tempHead);
+        Stack<Node> solutionPath = getHistoryNodes(temp);
 
         int size = solutionPath.size();
         for (int i = 0; i < size; i++) {
-            tempHead = solutionPath.pop();
-            Board.printBoard(tempHead.getCurrentState().getCurrentState());
+            temp = solutionPath.pop();
+            System.out.println("--------------------------------------");
+            printBoard(temp.getCurrentState().getCurrentState());
             System.out.println();
+            if(i!=0)
+            {
+                printValues(temp);
+            }
+            else {
+                System.out.println("initial state");
+            }
+
         }
 
-        printCost(tempHead);
+        printCost(temp);
     }
 
 
     public static void printCost(Node node) {
+
+        System.out.println();
+        System.out.println("***************DONE******************");
         System.out.println("cost = " + node.getPathCost());
+    }
+
+    private static void printValues(Node node)
+    {
+        System.out.println("{Heuristic,Path,F} = {" +node.getHeuristicCost() +"," +node.getPathCost()+","+node.getF()+"}");
+        System.out.println();
     }
 
 

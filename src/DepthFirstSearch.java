@@ -11,24 +11,9 @@ public class DepthFirstSearch implements Search {
 
     //to be able to detect repeated nodes
     private Map<String, Integer> exploredMap = new HashMap<>();
-    private List<String> exploredList = new LinkedList<>();
     //http://stackoverflow.com/questions/856124/breaking-out-of-a-recursion-in-java
     private boolean achieveGoal = false; //used to stop recursions
 
-
-
-    private boolean alreadyExplored(String stateString)
-    {
-        boolean exist = false;
-        for (int i = 0; i < exploredList.size(); i++) {
-
-            if (stateString.equals(exploredList.get(i))) {
-                exist = true;
-                break;
-            }
-        }
-        return exist;
-    }
 
     @Override
     public void initiateSearch(String[][] puzzleBoard, int heuristicChoice) {
@@ -63,8 +48,9 @@ public class DepthFirstSearch implements Search {
             Node tempHead = nodeStack.pop(); // get head node
 
             if (tempHead.getCurrentState().achievedGoal()) {
-                foundGoal(counter, tempHead);
-
+                achieveGoal = true;
+                Board.printSolution(tempHead);
+                //System.out.println(counter);
 
             } else {
                 //not goal, therefore continue searching
@@ -80,10 +66,6 @@ public class DepthFirstSearch implements Search {
                         nodeStack.add(node);
                     }
 
-//
-//                    if (!checkRepeats(node)) {
-//                        nodeStack.add(node);
-//                    }
                 }
                 counter++;
             }
@@ -91,10 +73,5 @@ public class DepthFirstSearch implements Search {
 
     }
 
-    private void foundGoal(int counter, Node tempHead) {
-        achieveGoal = true;
-        Board.printSolution(tempHead);
-        System.out.println(counter);
-    }
 
 }

@@ -19,14 +19,17 @@ public class AStarSearch implements Search {
         Node root = new Node(puzzleState);
 
         //FIFO queue, new successors go at end
-
-
         PriorityQueue<Node> nodeQueue = new PriorityQueue<>(10, new ComparatorAStar());
         nodeQueue.add(root);
 
         doSearch(nodeQueue);
     }
 
+    /**
+     * ignore repeated node
+     * @param n
+     * @return
+     */
     private boolean detectRepeatedNode(Node n) {
         String puzzleString = n.getCurrentState().getCurrentStateString();
         if (map.containsKey(puzzleString)) {
@@ -43,7 +46,7 @@ public class AStarSearch implements Search {
 
         int counter = 1;
 
-        while (!nodeQueue.isEmpty() && !achieveGoal) {
+        while (!(nodeQueue.isEmpty() || achieveGoal)) {
 
 
             Node tempHead = nodeQueue.poll(); // get head node
@@ -51,7 +54,7 @@ public class AStarSearch implements Search {
             if (tempHead.getCurrentState().achievedGoal()) {
                 achieveGoal = true;
                 Board.printSolution(tempHead);
-                System.out.println(counter);
+                //System.out.println(counter);
 
             } else {
                 //not goal, therefore continue searching

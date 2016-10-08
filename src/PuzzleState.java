@@ -406,7 +406,7 @@ public class PuzzleState {
                 {
                     int currentSuccessorLocation = i+2;
                     char charSuccessor = state.charAt(currentSuccessorLocation);
-                    System.out.println(charSuccessor);
+                    //System.out.println(charSuccessor);
 
                     //find current charactor in goal state
                     int currentLocationInGoal = goalState.indexOf(current);

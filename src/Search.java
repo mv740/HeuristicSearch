@@ -4,6 +4,8 @@
  * http://www.sdsc.edu/~tbailey/teaching/cse151/lectures/chap03b.html
  * https://www.ics.uci.edu/~welling/teaching/271fall09/UninformedSearch271f09.pdf
  * http://www-users.cs.umn.edu/~karypis/parbook/Figures/chap11.pdf
+ *
+ * admissible heuristic http://cse.iitk.ac.in/users/cs365/2009/ppt/13jan_Aman.pdf
  */
 public interface Search {
 
