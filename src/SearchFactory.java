@@ -3,15 +3,16 @@
  */
 public class SearchFactory {
 
-    public static Search getSearch(Search.TYPE type)
-    {
-        switch (type)
-        {
+    public static Search getSearch(Search.TYPE type) {
+        switch (type) {
             case BFS:
                 return new BreadthFirstSearch();
-            case BF: return  new BestFirstSearch();
-            case ASTAR: return new AStarSearch();
-            case DFS: return new DepthFirstSearch();
+            case BF:
+                return new BestFirstSearch();
+            case ASTAR:
+                return new AStarSearch();
+            case DFS:
+                return new DepthFirstSearch();
         }
         return null;
     }

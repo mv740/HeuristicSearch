@@ -9,6 +9,6 @@ public interface Search {
 
     enum TYPE { BFS, DFS,BF,ASTAR}
     // create root search node;
-    void initiateSearch(String[][] puzzleBoard);
+    void initiateSearch(String[][] puzzleBoard, int heuristicChoice);
 
 }
