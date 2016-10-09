@@ -162,7 +162,7 @@ public class PuzzleState {
      */
     private boolean slideRight(Blank blank) {
 
-        return blank.getCol() !=0;
+        return blank.getCol() != 0;
     }
 
     /**
@@ -173,7 +173,7 @@ public class PuzzleState {
      */
     private boolean slideUp(Blank blank) {
 
-        return blank.getRow() !=2;
+        return blank.getRow() != 2;
 
     }
 
@@ -185,13 +185,13 @@ public class PuzzleState {
      */
     private boolean slideDown(Blank blank) {
 
-        return blank.getRow() !=0;
+        return blank.getRow() != 0;
     }
 
 
     /**
      * Swap the Character doing the movement with "B"
-     *
+     * <p>
      * 1|B|2  we can slide 2 to the left which will produce 1|2|B
      *
      * @param option
@@ -255,7 +255,7 @@ public class PuzzleState {
     }
 
     /**
-     *  Calculated the value of misplaced tiles
+     * Calculated the value of misplaced tiles
      */
     public void setMisplacedTiles() {
 
@@ -299,7 +299,7 @@ public class PuzzleState {
     }
 
     /**
-     *  store the postion of each character in a map for faster access
+     * store the postion of each character in a map for faster access
      */
     public void setTilePostionMap() {
         int rowLength = currentState.length;
@@ -328,11 +328,11 @@ public class PuzzleState {
 
     /**
      * Sum of Eucledian distances of the tiles from their
-     goal positions
-
-     //http://cse.iitk.ac.in/users/cs365/2009/ppt/13jan_Aman.pdf slide 3
-
-     //Admissible heuristic
+     * goal positions
+     * <p>
+     * //http://cse.iitk.ac.in/users/cs365/2009/ppt/13jan_Aman.pdf slide 3
+     * <p>
+     * //Admissible heuristic
      */
     public void setEuclideanDistance() {
 
@@ -344,7 +344,7 @@ public class PuzzleState {
                 String tileValue = GOAL[row][col];
                 Position position = positionMap.get(tileValue);
 
-                distance += Math.pow((row - position.getRow()),2) + Math.pow((col - position.getCol()),2);
+                distance += Math.pow((row - position.getRow()), 2) + Math.pow((col - position.getCol()), 2);
             }
         }
 
@@ -358,53 +358,43 @@ public class PuzzleState {
 
     /**
      * Nilsson’s Sequence Score
-     https://heuristicswiki.wikispaces.com/Nilsson%27s+Sequence+Score
-
-     Heuristic is not admissible
-
+     * https://heuristicswiki.wikispaces.com/Nilsson%27s+Sequence+Score
+     * <p>
+     * Heuristic is not admissible
      */
-    public void setSequenceScore()
-    {
-
+    public void setSequenceScore() {
+        //P(n) = manhattan
         //h(n) = P(n)+3S(n)
-        this.sequenceScore = getManhattanDistance()+3*calculateSequenceScore();
+        this.sequenceScore = getManhattanDistance() + 3 * calculateSequenceScore();
     }
 
     /**
      * S(n) is the sequence score obtained by checking around the non-central squares in turn, allotting 2 for every tile not followed by its proper successor and 1 in case that the center is not empty.
+     *
      * @return
      */
-    private int calculateSequenceScore()
-    {
+    private int calculateSequenceScore() {
         //1 2 3 8 b 4 7 6 5
 
-        //1 2 3
-        //8 B 4
-        //7 6 5
         String goalState = Board.toString(GOAL);
-        String  state = getCurrentStateString();
+        String state = getCurrentStateString();
 
         int value = 0;
-        for(int i =0; i < state.length();i++)
-        {
+        for (int i = 0; i < state.length(); i++) {
             char blank = 'B';
             char space = ' ';
 
             char current = state.charAt(i);
-            if(i == 8)
-            {
-                if(current != blank)
-                {
+            if (i == 8) {
+                if (current != blank) {
                     //add 1 in case that the center is not empty.
-                    value+=1;
+                    value += 1;
                 }
 
-            }else if(current != space)
-            {
+            } else if (current != space) {
 
-                if(i != 16)
-                {
-                    int currentSuccessorLocation = i+2;
+                if (i != 16) {
+                    int currentSuccessorLocation = i + 2;
                     char charSuccessor = state.charAt(currentSuccessorLocation);
                     //System.out.println(charSuccessor);
 
@@ -412,16 +402,13 @@ public class PuzzleState {
                     int currentLocationInGoal = goalState.indexOf(current);
 
                     //if we reached goal[2][2] = 5 , it is the last tile since we reached end
-                    if(currentLocationInGoal<16)
-                    {
-                        char currentCharInGoalSuccessor = goalState.charAt(currentLocationInGoal+2);
+                    if (currentLocationInGoal < 16) {
+                        char currentCharInGoalSuccessor = goalState.charAt(currentLocationInGoal + 2);
 
-                        if(charSuccessor != currentCharInGoalSuccessor)
-                        {
-                            value+=2;
+                        if (charSuccessor != currentCharInGoalSuccessor) {
+                            value += 2;
                         }
                     }
-
 
                 }
             }

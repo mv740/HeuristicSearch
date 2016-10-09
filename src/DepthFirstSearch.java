@@ -50,7 +50,7 @@ public class DepthFirstSearch implements Search {
             if (tempHead.getCurrentState().achievedGoal()) {
                 achieveGoal = true;
                 Board.printSolution(tempHead);
-                //System.out.println(counter);
+                System.out.println("Counter = " +counter);
 
             } else {
                 //not goal, therefore continue searching

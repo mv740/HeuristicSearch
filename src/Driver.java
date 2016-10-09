@@ -1,4 +1,3 @@
-import java.util.PriorityQueue;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -12,8 +11,11 @@ public class Driver {
         System.out.println("8 puzzle search");
         System.out.println();
 
-        String[][] board = Board.generateBoard("1 3 4 8 2 B 7 6 5"); //3 movement from solution
+        //test #1
+        //String[][] board = Board.generateBoard("1 3 4 8 2 5 B 7 6"); //6 movement from solution
 
+        //test #2
+        String[][] board = Board.generateBoard("2 3 B 1 6 5 8 4 7"); //12 movement from solution
 
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("**************************** ");
@@ -61,7 +63,7 @@ public class Driver {
             System.out.println();
             System.out.print("Enter a number: ");
             h = reader.nextInt(); // Scans the next token of the input as an int.
-            while (h > 4 || h < 1) {
+            while (h > 4 || h < 0) {
                 System.out.print("Enter a number: ");
                 h = reader.nextInt();
             }
